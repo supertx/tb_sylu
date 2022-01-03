@@ -1,0 +1,598 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="renderer" content="webkit" />
+    <link href="/SPCP/Web/Content/css/index.css?v=202003131133" rel="stylesheet" />
+    <script src="/SPCP/Web/Scripts/jquery-2.1.4.min.js"></script>
+    <script src="/SPCP/Web/Scripts/validation.js?dt=20200512"></script>
+    <link href="/SPCP/Web/Scripts/layer/theme/default/layer.css" rel="stylesheet" />
+    <script src="/SPCP/Web/Scripts/layer/layer.js"></script>
+    <title>沈阳理工大学学生疫情防控管理平台</title>
+    <script type="text/javascript">
+        /*解决苹果返回不刷新问题*/
+        $(function () {
+            var isPageHide = false;
+            window.addEventListener('pageshow', function () {
+                if (isPageHide) {
+                    window.location.reload();
+                }
+            });
+            window.addEventListener('pagehide', function () {
+                isPageHide = true;
+            });
+        });
+    </script>
+</head>
+<body>
+
+
+<script src="/SPCP/Web/Scripts/laydate/laydate.js"></script>
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=Wh4HAAtaSKPMYpyyOqpxR04BwyTsc5SP"></script>
+<script src="/SPCP/Web/Scripts/Report.js?dt=202101201511"></script>
+<form name="form1" method="post" id="form1">
+    <h1>
+        <span id="TopicName">沈阳理工大学2021-2022学年寒假学生健康状态信息采集</span>
+    </h1>
+    <div class="Table_list">
+        <div class="textlist">
+            <div class="row ">
+                <pre CssClass="PutThing">此调查表采集全校学生在寒假期间的健康数据，旅居史及接触史信息，请全体同学积极配合，及时、准确填报，每天完成健康日报工作。</pre>
+            </div>
+        </div>
+        <div class="textlist">
+            <div class="row">
+                <div class="th_left phone">学号：</div>
+                <div class="th_right phone">
+                    <input name="StudentId" type="text" id="StudentId" readonly="readonly" class="input-style" style="        border: none;" value="1903050419" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="th_left phone">姓名：</div>
+                <div class="th_right phone">
+                    <input name="Name" type="text" id="Name" readonly="readonly" class="input-style" style="        border: none;" value="唐鑫" />
+                </div>
+            </div>
+                <div class="row">
+                    <div class="th_left phone">性别：</div>
+                    <div class="th_right  phone  ">
+                        男
+                        <input id="Sex" name="Sex" type="hidden" value="男" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="th_left phone">学历：</div>
+                    <div class="th_right phone">
+                        本科
+                        <input id="SpeType" name="SpeType" type="hidden" value="B" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="th_left phone">学院：</div>
+                    <div class="th_right phone">
+                        信息科学与工程学院
+                        <input id="CollegeNo" name="CollegeNo" type="hidden" value="03" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="th_left phone">年级：</div>
+                    <div class="th_right phone">
+                        2019级
+                        <input id="SpeGrade" name="SpeGrade" type="hidden" value="2019" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="th_left phone">专业名称：</div>
+                    <div class="th_right phone">
+                        计算机科学与技术
+                        <input id="SpecialtyName" name="SpecialtyName" type="hidden" value="计算机科学与技术" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="th_left phone">班级名称：</div>
+                    <div class="th_right phone">
+                        19计算机科学与技术04班
+                        <input id="ClassName" name="ClassName" type="hidden" value="19计算机科学与技术04班" />
+                    </div>
+                </div>
+        </div>
+        <div class="row">
+            <div class="th_left"><span class="red">*</span>手机号：</div>
+            <div class="th_right">
+                <input name="MoveTel" type="text" id="MoveTel" class="required validate input-style" vtype="TelPhone" value="18862197468" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="th_left"><span class="red">*</span>当前所在地址：</div>
+            <div class="th_right">
+                <div id="allmap"></div>
+                <select name="Province" onchange="ProvinceChange(this, false);" class="select-style required validate">
+                    <option value=""></option>
+                        <option value="110000">北京市</option>
+                        <option value="120000">天津市</option>
+                        <option value="130000">河北省</option>
+                        <option value="140000">山西省</option>
+                        <option value="150000">内蒙古自治区</option>
+                        <option value="210000">辽宁省</option>
+                        <option value="220000">吉林省</option>
+                        <option value="230000">黑龙江省</option>
+                        <option value="310000">上海市</option>
+                        <option value="320000" selected="selected">江苏省</option>
+                        <option value="330000">浙江省</option>
+                        <option value="340000">安徽省</option>
+                        <option value="350000">福建省</option>
+                        <option value="360000">江西省</option>
+                        <option value="370000">山东省</option>
+                        <option value="410000">河南省</option>
+                        <option value="420000">湖北省</option>
+                        <option value="430000">湖南省</option>
+                        <option value="440000">广东省</option>
+                        <option value="450000">广西壮族自治区</option>
+                        <option value="460000">海南省</option>
+                        <option value="500000">重庆市</option>
+                        <option value="510000">四川省</option>
+                        <option value="520000">贵州省</option>
+                        <option value="530000">云南省</option>
+                        <option value="540000">西藏自治区</option>
+                        <option value="610000">陕西省</option>
+                        <option value="620000">甘肃省</option>
+                        <option value="630000">青海省</option>
+                        <option value="640000">宁夏回族自治区</option>
+                        <option value="650000">新疆维吾尔自治区</option>
+                        <option value="710000">台湾省</option>
+                        <option value="810000">香港特别行政区</option>
+                        <option value="820000">澳门特别行政区</option>
+                        <option value="990000">国外</option>
+                </select>
+                <select name="City" onchange="CityChange(this);" data-defaultValue="320500" class="select-style required validate"></select>
+                <select name="County" data-defaultValue="320505" class="select-style required validate"></select>
+                <input name="ComeWhere" type="text" maxlength="50" value="阳山街道" class="required validate input-style" placeholder="例：XX街道XX社区XX号" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="th_left"><span class="red">*</span>家庭住址：</div>
+            <div class="th_right">
+                <select name="FaProvince" onchange="ProvinceChange(this, false);" class="select-style required validate">
+                    <option value=""></option>
+                        <option value="110000">北京市</option>
+                        <option value="120000">天津市</option>
+                        <option value="130000">河北省</option>
+                        <option value="140000">山西省</option>
+                        <option value="150000">内蒙古自治区</option>
+                        <option value="210000">辽宁省</option>
+                        <option value="220000">吉林省</option>
+                        <option value="230000">黑龙江省</option>
+                        <option value="310000">上海市</option>
+                        <option value="320000" selected="selected">江苏省</option>
+                        <option value="330000">浙江省</option>
+                        <option value="340000">安徽省</option>
+                        <option value="350000">福建省</option>
+                        <option value="360000">江西省</option>
+                        <option value="370000">山东省</option>
+                        <option value="410000">河南省</option>
+                        <option value="420000">湖北省</option>
+                        <option value="430000">湖南省</option>
+                        <option value="440000">广东省</option>
+                        <option value="450000">广西壮族自治区</option>
+                        <option value="460000">海南省</option>
+                        <option value="500000">重庆市</option>
+                        <option value="510000">四川省</option>
+                        <option value="520000">贵州省</option>
+                        <option value="530000">云南省</option>
+                        <option value="540000">西藏自治区</option>
+                        <option value="610000">陕西省</option>
+                        <option value="620000">甘肃省</option>
+                        <option value="630000">青海省</option>
+                        <option value="640000">宁夏回族自治区</option>
+                        <option value="650000">新疆维吾尔自治区</option>
+                        <option value="710000">台湾省</option>
+                        <option value="810000">香港特别行政区</option>
+                        <option value="820000">澳门特别行政区</option>
+                        <option value="990000">国外</option>
+                </select>
+                <select name="FaCity" onchange="CityChange(this);" data-defaultValue="320500" class="select-style required validate"></select>
+                <select name="FaCounty" data-defaultValue="320505" class="select-style required validate"></select>
+                <input name="FaComeWhere" type="text" maxlength="50" value="阳山街道" class="required validate input-style" placeholder="例：XX街道XX社区XX号" />
+            </div>
+        </div>
+
+        <!--采集返校信息 -->
+
+        <!--配置项数据绑定start-->
+            <div class='row'>
+                <div class='th_left'>
+                        <span class='red'>*</span>
+                    您今天体温是否正常？（体温介于36.5-37.3摄氏度为正常）：
+                </div>
+                    <div class='th_right required validate radio_list'>
+                            <div class='item' data-tid="926853bd-6292-48ef-b554-0ea0cb99b808">
+                                &nbsp;&nbsp;<input name='radio_1' id="e2f169d0-0778-4e3e-8ebf-64ce5a44f307"
+                                                   checked="checked"
+                                                   type='radio' value='e2f169d0-0778-4e3e-8ebf-64ce5a44f307'
+                                                   data-optionName="是" onchange="ChangeInputBoxStatus(this)" />
+                                &nbsp;<label for='e2f169d0-0778-4e3e-8ebf-64ce5a44f307'>是</label>
+                            </div>
+                            <div class='item' data-tid="926853bd-6292-48ef-b554-0ea0cb99b808">
+                                &nbsp;&nbsp;<input name='radio_1' id="669ed824-8d41-469d-8540-cc65ba221131"
+                                                   type='radio' value='669ed824-8d41-469d-8540-cc65ba221131'
+                                                   data-optionName="否" onchange="ChangeInputBoxStatus(this)" />
+                                &nbsp;<label for='669ed824-8d41-469d-8540-cc65ba221131'>否</label>
+                            </div>
+                    </div>
+            </div>
+            <div class='row'>
+                <div class='th_left'>
+                        <span class='red'>*</span>
+                    您今日是否处于中高风险地区？：
+                </div>
+                    <div class='th_right required validate radio_list'>
+                            <div class='item' data-tid="5c2ddaef-1cf4-4995-921c-de1585e71fe1">
+                                &nbsp;&nbsp;<input name='radio_2' id="c8ecb725-9788-4ed0-b9d2-4be23444ce3e"
+                                                   checked="checked"
+                                                   type='radio' value='c8ecb725-9788-4ed0-b9d2-4be23444ce3e'
+                                                   data-optionName="否" onchange="ChangeInputBoxStatus(this)" />
+                                &nbsp;<label for='c8ecb725-9788-4ed0-b9d2-4be23444ce3e'>否</label>
+                            </div>
+                            <div class='item' data-tid="5c2ddaef-1cf4-4995-921c-de1585e71fe1">
+                                &nbsp;&nbsp;<input name='radio_2' id="5d94f4da-aa29-4449-979b-856748cf45fb"
+                                                   type='radio' value='5d94f4da-aa29-4449-979b-856748cf45fb'
+                                                   data-optionName="是（请填写详细地址、精确到区/县）" onchange="ChangeInputBoxStatus(this)" />
+                                &nbsp;<label for='5d94f4da-aa29-4449-979b-856748cf45fb'>是（请填写详细地址、精确到区/县）</label>
+                            </div>
+                                <div class="row next_inputbox" style="display: none ">
+                                    <div class="th_left">
+                                        ：
+                                    </div>
+                                    <div class="th_right">
+                                        <div class='item' data-tid="5c2ddaef-1cf4-4995-921c-de1585e71fe1" data-sid="5d94f4da-aa29-4449-979b-856748cf45fb">
+                                            <input name="text_1" type="text" maxlength="25" placeholder=""
+                                                   class="input-style validate  required "
+                                                   value="" />
+                                        </div>
+                                    </div>
+                                </div>
+                    </div>
+            </div>
+            <div class='row'>
+                <div class='th_left'>
+                        <span class='red'>*</span>
+                    和您共同居住的家庭成员是否有新冠肺炎确诊或疑似病例？：
+                </div>
+                    <div class='th_right required validate radio_list'>
+                            <div class='item' data-tid="6f95a926-c6d6-4fa7-9d74-fbcfcd79ec7b">
+                                &nbsp;&nbsp;<input name='radio_3' id="4c68d98c-55b7-4e14-bbe8-e8d96695db5d"
+                                                   type='radio' value='4c68d98c-55b7-4e14-bbe8-e8d96695db5d'
+                                                   data-optionName="是" onchange="ChangeInputBoxStatus(this)" />
+                                &nbsp;<label for='4c68d98c-55b7-4e14-bbe8-e8d96695db5d'>是</label>
+                            </div>
+                            <div class='item' data-tid="6f95a926-c6d6-4fa7-9d74-fbcfcd79ec7b">
+                                &nbsp;&nbsp;<input name='radio_3' id="a884f81e-f401-451d-9f3d-0526aa886feb"
+                                                   checked="checked"
+                                                   type='radio' value='a884f81e-f401-451d-9f3d-0526aa886feb'
+                                                   data-optionName="否" onchange="ChangeInputBoxStatus(this)" />
+                                &nbsp;<label for='a884f81e-f401-451d-9f3d-0526aa886feb'>否</label>
+                            </div>
+                    </div>
+            </div>
+            <div class='row'>
+                <div class='th_left'>
+                        <span class='red'>*</span>
+                    您是否正在进行集中隔离？：
+                </div>
+                    <div class='th_right required validate radio_list'>
+                            <div class='item' data-tid="6cd479f3-dd6a-4bab-809a-3abdf28e5a46">
+                                &nbsp;&nbsp;<input name='radio_4' id="f669642b-ebac-4d0a-a896-4387a84add08"
+                                                   type='radio' value='f669642b-ebac-4d0a-a896-4387a84add08'
+                                                   data-optionName="是" onchange="ChangeInputBoxStatus(this)" />
+                                &nbsp;<label for='f669642b-ebac-4d0a-a896-4387a84add08'>是</label>
+                            </div>
+                            <div class='item' data-tid="6cd479f3-dd6a-4bab-809a-3abdf28e5a46">
+                                &nbsp;&nbsp;<input name='radio_4' id="62ad9bed-3201-4607-b845-5e279a0311d0"
+                                                   checked="checked"
+                                                   type='radio' value='62ad9bed-3201-4607-b845-5e279a0311d0'
+                                                   data-optionName="否" onchange="ChangeInputBoxStatus(this)" />
+                                &nbsp;<label for='62ad9bed-3201-4607-b845-5e279a0311d0'>否</label>
+                            </div>
+                    </div>
+            </div>
+            <div class='row'>
+                <div class='th_left'>
+                        <span class='red'>*</span>
+                    您是否今日解除集中隔离？：
+                </div>
+                    <div class='th_right required validate radio_list'>
+                            <div class='item' data-tid="e6f578a6-6a0d-4b17-a18f-f1de3cb81d29">
+                                &nbsp;&nbsp;<input name='radio_5' id="0c16980f-1f4b-4114-86d1-70696395055e"
+                                                   type='radio' value='0c16980f-1f4b-4114-86d1-70696395055e'
+                                                   data-optionName="是" onchange="ChangeInputBoxStatus(this)" />
+                                &nbsp;<label for='0c16980f-1f4b-4114-86d1-70696395055e'>是</label>
+                            </div>
+                            <div class='item' data-tid="e6f578a6-6a0d-4b17-a18f-f1de3cb81d29">
+                                &nbsp;&nbsp;<input name='radio_5' id="57722ddd-3093-4978-86da-1213420f36c4"
+                                                   checked="checked"
+                                                   type='radio' value='57722ddd-3093-4978-86da-1213420f36c4'
+                                                   data-optionName="否" onchange="ChangeInputBoxStatus(this)" />
+                                &nbsp;<label for='57722ddd-3093-4978-86da-1213420f36c4'>否</label>
+                            </div>
+                    </div>
+            </div>
+            <div class='row'>
+                <div class='th_left'>
+                        <span class='red'>*</span>
+                    您是否正在进行居家隔离？：
+                </div>
+                    <div class='th_right required validate radio_list'>
+                            <div class='item' data-tid="23dfd17a-84b0-462c-a27d-fbafbe670278">
+                                &nbsp;&nbsp;<input name='radio_6' id="e4505b90-d866-409f-9ad8-5970f5e9fc74"
+                                                   type='radio' value='e4505b90-d866-409f-9ad8-5970f5e9fc74'
+                                                   data-optionName="是" onchange="ChangeInputBoxStatus(this)" />
+                                &nbsp;<label for='e4505b90-d866-409f-9ad8-5970f5e9fc74'>是</label>
+                            </div>
+                            <div class='item' data-tid="23dfd17a-84b0-462c-a27d-fbafbe670278">
+                                &nbsp;&nbsp;<input name='radio_6' id="c6bcc8ce-86f1-404c-b7f8-ac583d899c75"
+                                                   checked="checked"
+                                                   type='radio' value='c6bcc8ce-86f1-404c-b7f8-ac583d899c75'
+                                                   data-optionName="否" onchange="ChangeInputBoxStatus(this)" />
+                                &nbsp;<label for='c6bcc8ce-86f1-404c-b7f8-ac583d899c75'>否</label>
+                            </div>
+                    </div>
+            </div>
+            <div class='row'>
+                <div class='th_left'>
+                        <span class='red'>*</span>
+                    您是否今日解除居家隔离？：
+                </div>
+                    <div class='th_right required validate radio_list'>
+                            <div class='item' data-tid="0428ad6d-0c14-4c38-81fb-dc6928ae6608">
+                                &nbsp;&nbsp;<input name='radio_7' id="3f286cf3-13ae-43a1-8c4b-523bc9c49cb3"
+                                                   type='radio' value='3f286cf3-13ae-43a1-8c4b-523bc9c49cb3'
+                                                   data-optionName="是" onchange="ChangeInputBoxStatus(this)" />
+                                &nbsp;<label for='3f286cf3-13ae-43a1-8c4b-523bc9c49cb3'>是</label>
+                            </div>
+                            <div class='item' data-tid="0428ad6d-0c14-4c38-81fb-dc6928ae6608">
+                                &nbsp;&nbsp;<input name='radio_7' id="12727e9b-cd2f-413e-ae30-36adafd5203f"
+                                                   checked="checked"
+                                                   type='radio' value='12727e9b-cd2f-413e-ae30-36adafd5203f'
+                                                   data-optionName="否" onchange="ChangeInputBoxStatus(this)" />
+                                &nbsp;<label for='12727e9b-cd2f-413e-ae30-36adafd5203f'>否</label>
+                            </div>
+                    </div>
+            </div>
+            <div class='row'>
+                <div class='th_left'>
+                        <span class='red'>*</span>
+                    您今日是否进行了核酸检测？：
+                </div>
+                    <div class='th_right required validate radio_list'>
+                            <div class='item' data-tid="85e00a79-176f-4fcf-8d14-8bb14075d51f">
+                                &nbsp;&nbsp;<input name='radio_8' id="e1bf240c-0e3e-43a1-9a4c-779264842652"
+                                                   type='radio' value='e1bf240c-0e3e-43a1-9a4c-779264842652'
+                                                   data-optionName="是" onchange="ChangeInputBoxStatus(this)" />
+                                &nbsp;<label for='e1bf240c-0e3e-43a1-9a4c-779264842652'>是</label>
+                            </div>
+                            <div class='item' data-tid="85e00a79-176f-4fcf-8d14-8bb14075d51f">
+                                &nbsp;&nbsp;<input name='radio_8' id="e0559a52-d3d1-4203-ac9a-d221506a507f"
+                                                   checked="checked"
+                                                   type='radio' value='e0559a52-d3d1-4203-ac9a-d221506a507f'
+                                                   data-optionName="否" onchange="ChangeInputBoxStatus(this)" />
+                                &nbsp;<label for='e0559a52-d3d1-4203-ac9a-d221506a507f'>否</label>
+                            </div>
+                    </div>
+            </div>
+            <div class='row'>
+                <div class='th_left'>
+                        <span class='red'>*</span>
+                    您今日是否发生了所在地（跨地级市）异动变化？：
+                </div>
+                    <div class='th_right required validate radio_list'>
+                            <div class='item' data-tid="bd5a0708-79a3-4c92-a978-03aba2dac8a8">
+                                &nbsp;&nbsp;<input name='radio_9' id="c0c7f29f-dcba-467f-b8c6-6fffb741038d"
+                                                   type='radio' value='c0c7f29f-dcba-467f-b8c6-6fffb741038d'
+                                                   data-optionName="是（请填写详细变更信息）" onchange="ChangeInputBoxStatus(this)" />
+                                &nbsp;<label for='c0c7f29f-dcba-467f-b8c6-6fffb741038d'>是（请填写详细变更信息）</label>
+                            </div>
+                                <div class="row next_inputbox" style="display: none ">
+                                    <div class="th_left">
+                                        ：
+                                    </div>
+                                    <div class="th_right">
+                                        <div class='item' data-tid="bd5a0708-79a3-4c92-a978-03aba2dac8a8" data-sid="c0c7f29f-dcba-467f-b8c6-6fffb741038d">
+                                            <input name="text_2" type="text" maxlength="25" placeholder=""
+                                                   class="input-style validate  required "
+                                                   value="" />
+                                        </div>
+                                    </div>
+                                </div>
+                            <div class='item' data-tid="bd5a0708-79a3-4c92-a978-03aba2dac8a8">
+                                &nbsp;&nbsp;<input name='radio_9' id="c16d5a27-5923-43d8-b6a6-d5733803490b"
+                                                   checked="checked"
+                                                   type='radio' value='c16d5a27-5923-43d8-b6a6-d5733803490b'
+                                                   data-optionName="否" onchange="ChangeInputBoxStatus(this)" />
+                                &nbsp;<label for='c16d5a27-5923-43d8-b6a6-d5733803490b'>否</label>
+                            </div>
+                    </div>
+            </div>
+            <div class='row'>
+                <div class='th_left'>
+                        <span class='red'>*</span>
+                    您今日是否是确诊病例密切接触者？：
+                </div>
+                    <div class='th_right required validate radio_list'>
+                            <div class='item' data-tid="91d7f9a5-aed8-462f-81f5-9d339c3f2d3a">
+                                &nbsp;&nbsp;<input name='radio_10' id="82feb453-cf09-4ac8-b626-983ef9abf845"
+                                                   type='radio' value='82feb453-cf09-4ac8-b626-983ef9abf845'
+                                                   data-optionName="是" onchange="ChangeInputBoxStatus(this)" />
+                                &nbsp;<label for='82feb453-cf09-4ac8-b626-983ef9abf845'>是</label>
+                            </div>
+                            <div class='item' data-tid="91d7f9a5-aed8-462f-81f5-9d339c3f2d3a">
+                                &nbsp;&nbsp;<input name='radio_10' id="3a5fbe75-7bf4-4b6d-93f1-f561dbbf0ead"
+                                                   checked="checked"
+                                                   type='radio' value='3a5fbe75-7bf4-4b6d-93f1-f561dbbf0ead'
+                                                   data-optionName="否" onchange="ChangeInputBoxStatus(this)" />
+                                &nbsp;<label for='3a5fbe75-7bf4-4b6d-93f1-f561dbbf0ead'>否</label>
+                            </div>
+                    </div>
+            </div>
+            <div class='row'>
+                <div class='th_left'>
+                        <span class='red'>*</span>
+                    您今日是否确诊为新冠肺炎病例？：
+                </div>
+                    <div class='th_right required validate radio_list'>
+                            <div class='item' data-tid="025d0800-de7d-45e3-b2b4-c240bec5aa51">
+                                &nbsp;&nbsp;<input name='radio_11' id="cd38dfd9-fbce-477d-938d-e9320798f961"
+                                                   type='radio' value='cd38dfd9-fbce-477d-938d-e9320798f961'
+                                                   data-optionName="是" onchange="ChangeInputBoxStatus(this)" />
+                                &nbsp;<label for='cd38dfd9-fbce-477d-938d-e9320798f961'>是</label>
+                            </div>
+                            <div class='item' data-tid="025d0800-de7d-45e3-b2b4-c240bec5aa51">
+                                &nbsp;&nbsp;<input name='radio_11' id="3a36a22f-5af7-4b48-a472-7df55a8ba374"
+                                                   checked="checked"
+                                                   type='radio' value='3a36a22f-5af7-4b48-a472-7df55a8ba374'
+                                                   data-optionName="否" onchange="ChangeInputBoxStatus(this)" />
+                                &nbsp;<label for='3a36a22f-5af7-4b48-a472-7df55a8ba374'>否</label>
+                            </div>
+                    </div>
+            </div>
+            <div class='row'>
+                <div class='th_left'>
+                        <span class='red'>*</span>
+                    您今日是否处于重点管控地区？：
+                </div>
+                    <div class='th_right required validate radio_list'>
+                            <div class='item' data-tid="0827f0a0-60eb-4c62-9741-d742bf569ece">
+                                &nbsp;&nbsp;<input name='radio_12' id="8f1dddba-8bfc-4b06-8f9c-44a50d7c5ceb"
+                                                   checked="checked"
+                                                   type='radio' value='8f1dddba-8bfc-4b06-8f9c-44a50d7c5ceb'
+                                                   data-optionName="否" onchange="ChangeInputBoxStatus(this)" />
+                                &nbsp;<label for='8f1dddba-8bfc-4b06-8f9c-44a50d7c5ceb'>否</label>
+                            </div>
+                            <div class='item' data-tid="0827f0a0-60eb-4c62-9741-d742bf569ece">
+                                &nbsp;&nbsp;<input name='radio_12' id="24afbc3c-2e3d-462f-9c58-f4a05adcd14b"
+                                                   type='radio' value='24afbc3c-2e3d-462f-9c58-f4a05adcd14b'
+                                                   data-optionName="是（请填写详细地址、精确到区/县）" onchange="ChangeInputBoxStatus(this)" />
+                                &nbsp;<label for='24afbc3c-2e3d-462f-9c58-f4a05adcd14b'>是（请填写详细地址、精确到区/县）</label>
+                            </div>
+                                <div class="row next_inputbox" style="display: none ">
+                                    <div class="th_left">
+                                        ：
+                                    </div>
+                                    <div class="th_right">
+                                        <div class='item' data-tid="0827f0a0-60eb-4c62-9741-d742bf569ece" data-sid="24afbc3c-2e3d-462f-9c58-f4a05adcd14b">
+                                            <input name="text_3" type="text" maxlength="25" placeholder=""
+                                                   class="input-style validate  required "
+                                                   value="" />
+                                        </div>
+                                    </div>
+                                </div>
+                    </div>
+            </div>
+            <div class='row'>
+                <div class='th_left'>
+                        <span class='red'>*</span>
+                    您今日是否处于重点关注地区？：
+                </div>
+                    <div class='th_right required validate radio_list'>
+                            <div class='item' data-tid="7d852786-1eca-4beb-82f2-9b52fd46ad6e">
+                                &nbsp;&nbsp;<input name='radio_13' id="51fac408-9d07-4a7a-9375-b1872c4ab0bd"
+                                                   checked="checked"
+                                                   type='radio' value='51fac408-9d07-4a7a-9375-b1872c4ab0bd'
+                                                   data-optionName="否" onchange="ChangeInputBoxStatus(this)" />
+                                &nbsp;<label for='51fac408-9d07-4a7a-9375-b1872c4ab0bd'>否</label>
+                            </div>
+                            <div class='item' data-tid="7d852786-1eca-4beb-82f2-9b52fd46ad6e">
+                                &nbsp;&nbsp;<input name='radio_13' id="669ee3cd-fd17-4e69-9e17-c41927470c39"
+                                                   type='radio' value='669ee3cd-fd17-4e69-9e17-c41927470c39'
+                                                   data-optionName="是（请填写详细地址、精确到区/县）" onchange="ChangeInputBoxStatus(this)" />
+                                &nbsp;<label for='669ee3cd-fd17-4e69-9e17-c41927470c39'>是（请填写详细地址、精确到区/县）</label>
+                            </div>
+                                <div class="row next_inputbox" style="display: none ">
+                                    <div class="th_left">
+                                        ：
+                                    </div>
+                                    <div class="th_right">
+                                        <div class='item' data-tid="7d852786-1eca-4beb-82f2-9b52fd46ad6e" data-sid="669ee3cd-fd17-4e69-9e17-c41927470c39">
+                                            <input name="text_4" type="text" maxlength="25" placeholder=""
+                                                   class="input-style validate  required "
+                                                   value="" />
+                                        </div>
+                                    </div>
+                                </div>
+                    </div>
+            </div>
+        <!--配置项数据绑定end-->
+        <div class="row">
+            <div class="th_left"><span class="red">*</span>采集日期：</div>
+            <div class="th_right">
+                <input type="date" disabled="disabled" class="input-style laydate" name="RegisterDate" id="RegisterDate" value="2022-01-05" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="th_left">其他说明：</div>
+            <div class="th_right">
+                <textarea name="Other" id="Other" rows="3"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="th_right w_100">
+                <pre>本人承诺：以上填写信息真实有效，如出现漏报、瞒报及不实信息，本人承担相应后果及责任！</pre>
+                <p>
+                    <div class="check_input text-center">
+                        <input type="checkbox" id="ckCLS" onclick="CKTY()" />
+                        <label for="ckCLS">我已阅读承诺书，并保证按承诺书内容执行。</label>
+                    </div>
+                </p>
+            </div>
+
+        </div>
+    </div>
+    <div id="SaveBtnDiv" class="btn_div fixed">
+        <input id="GetAreaUrl" name="GetAreaUrl" type="hidden" value="/SPCP/Web/Report/GetArea" />
+        <!--基础信息-->
+        <input id="IdCard" name="IdCard" type="hidden" value="320923200205016319" />
+        <!--当前所在地-->
+        <input id="ProvinceName" name="ProvinceName" type="hidden" value="江苏省" />
+        <input id="CityName" name="CityName" type="hidden" value="苏州市" />
+        <input id="CountyName" name="CountyName" type="hidden" value="虎丘区" />
+
+        <!--家庭所在地-->
+        <input id="FaProvinceName" name="FaProvinceName" type="hidden" value="江苏省" />
+        <input id="FaCityName" name="FaCityName" type="hidden" value="苏州市" />
+        <input id="FaCountyName" name="FaCountyName" type="hidden" value="虎丘区" />
+
+        <!--配置项数据个数-->
+        <input id="radioCount" name="radioCount" type="hidden" value="13" />
+        <input id="checkboxCount" name="checkboxCount" type="hidden" value="0" />
+        <input id="blackCount" name="blackCount" type="hidden" value="4" />
+        <input id="PZData" name="PZData" type="hidden" value="" />
+
+        <input name="ReSubmiteFlag" type="hidden" value="28bab9ca-928e-4d20-98ee-9f17b5fcdf21" />
+        <button type="button" class="save_form btnDisabled" disabled>提   交</button>
+    </div>
+</form>
+        <link href="/SPCP/Web/Content/css/menustyle.css" rel="stylesheet" />
+        <script src="/SPCP/Web/Scripts/menu.js"></script>
+        <div id="cd-nav" class="is-fixed">
+            <a href="javascript:void(0)" class="cd-nav-trigger"><span></span></a>
+            <nav id="cd-main-nav">
+                <ul>
+                    <li>
+                        <a href="/SPCP/Web/Account/ChooseSys">
+                            <img src="/SPCP/Web/Content/img/icon1.png" /> 首页
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/SPCP/Web/Account/Logout">
+                            <img src="/SPCP/Web/Content/img/icon3.png" /> 退出
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+        </div>
+</body>
+</html>

@@ -12,6 +12,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from 体温自动填报plus.util import send_email
 from 体温自动填报plus.util import tempFill
+from TbModel.models import User
 
 def tb(request):
     data = request.POST
@@ -30,13 +31,13 @@ def tb(request):
             if line['username'] == username:
                 return HttpResponse("<h1>已完成注册请勿重复注册</h1>")
     try:
-        send_email.re_email(email, username)
+        send_email.re_email(email, username, password)
         # 将文件信息保存至txt文件中
         with open('/root/py/体温自动填报plus/resource/stuInfo.txt', 'a') as stuInfo:
             stuInfo.write(dict.__str__({"email": email, 'username': username, 'password': password}) + "\n")
             stuInfo.flush()
     except Exception as e:
-        return HttpResponse("<h1>注册失败,每日10点自动填报</h1>")
+        return HttpResponse("<h1>注册失败</h1>")
         e.with_traceback()
     return HttpResponse("<h1>注册成功,每日10点自动填报</h1>")
 
