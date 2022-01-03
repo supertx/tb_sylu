@@ -1,0 +1,4 @@
+{'email': '1374411672@qq.com', 'username': '1903050419', 'password': '016319'}
+{'email': '1440476217@qq.com', 'username': '1903050418', 'password': '205213'}
+{'email': '2365168978@qq.com', 'username': '1905040413', 'password': '16877x'}
+{'email': '2546097430@qq.com', 'username': '1903050405', 'password': '047022'}

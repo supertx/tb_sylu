@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zn_CH">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>体温自动填报</title>
+    <script src="http://121.5.21.159:8000/static/particles.min.js"></script>
+    <script>
+        window.onload = function () {
+            Particles.init({
+                selector: '.background'
+            });
+        };
+    </script>
+
+    <script>
+        Particles.
+            init
+            ({
+
+                // normal options
+                selector:
+                    '.background'
+                ,
+                maxParticles:
+                    300
+                ,
+                connectParticles:
+                    true
+                ,
+                // options for breakpoints
+                responsive: [
+                    {
+                        breakpoint:
+                            768
+                        ,
+                        options: {
+                            maxParticles:
+                                200
+                            ,
+                            color:
+                                '#aaaaaa'
+                            ,
+
+
+                        }
+                    }, {
+                        breakpoint:
+                            425
+                        ,
+                        options: {
+                            maxParticles:
+                                100
+                            ,
+                            connectParticles:
+                                true,
+                            minDistance:
+                                90
+                        }
+                    }, {
+                        breakpoint:
+                            320
+                        ,
+                        options: {
+                            maxParticles:
+                                0,
+
+                            connectParticles:
+                                true,
+                            minDistance:
+                                90
+                            // disables particles.js
+                        }
+                    }
+                ]
+            });
+    </script>
+
+    <style>
+        body {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .background {
+            position: absolute;
+            display: block;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        ul {
+            margin: 200px auto;
+            list-style: none;
+            width: 1200px;
+            background-color: rgba(0, 0, 0, .2);
+        }
+
+        label {
+            display: inline-block;
+            width: 400px;
+            text-align: right;
+            padding-right: 10px;
+        }
+
+        .form_bd input {
+            text-indent: 2em;
+            width: 300px;
+            height: 40px;
+            margin-top: 20px;
+            outline: none;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 0, 0, .3);
+        }
+
+
+        .form_bd li:nth-child(4) {
+            margin-top: 30px;
+            margin-left: 400px;
+        }
+
+        .form_bd li:nth-child(4) input {
+            width: 200px;
+            height: 34px;
+            background-color: orange;
+            color: white;
+            border: 1px solid transparent;
+            border-radius: 10px;
+            outline: none;
+            transition: all .5s;
+            margin: 30px 30px;
+        }
+
+        .form_bd li:nth-child(4) input:hover {
+            background-color: tomato;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form_bd">
+        <form  method="post" action="/tb/">
+            <ul>
+                <li><label for="userEmail">邮箱: </label><input type="text" name="userEmail" id="userEmail" placeholder="请输入邮箱,用于接受填报消息"></li>
+                <li><label for="username">疫情管理系统账号: </label><input type="text" name="username" id="username" placeholder="学号"></li>
+                <li><label for="password">疫情管理系统密码: </label><input type="password" name="password" id="password" placeholder="身份证后6位"></li>
+                <li><input type="submit" value="提交"></li>
+            </ul>
+        </form>
+    </div>
+    <canvas class="background"></canvas>
+    <script src="path/to/particles.min.js"></script>
+</body>
+
+</html>
