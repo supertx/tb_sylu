@@ -39,11 +39,10 @@ def re_email(target, xh, pwd):
     name = read_for_name(xh)
     print(name.__str__())
     if name is False:
-        Exception("账户错误")
-    user = User(email=target, username=xh, password=pwd, name=name)
+        name = "我也不知道"
+    user = User(email=target, username=xh, password=pwd, name=name, flag=0)
     user.save()
     yag = yagmail.SMTP(user='13584894459@163.com', password='BQIHFXEJAFZTEDYG', host='smtp.163.com')
-    # yag.send('3170803065@qq.com', 'test', 'test')
     yag.send(target, '注册成功回信',
              '<h1>恭喜' + xh + "," + name + '注册服务成功<h1><hr><h2>本服务为sylu的学生提供免费'
                                           '的体温填报服务,'

@@ -37,8 +37,7 @@ def tb(request):
             stuInfo.write(dict.__str__({"email": email, 'username': username, 'password': password}) + "\n")
             stuInfo.flush()
     except Exception as e:
-        return HttpResponse("<h1>注册失败</h1>")
-        e.with_traceback()
+        return HttpResponse("<h1>注册失败"+"</h1>")
     return HttpResponse("<h1>注册成功,每日10点自动填报</h1>")
 
 

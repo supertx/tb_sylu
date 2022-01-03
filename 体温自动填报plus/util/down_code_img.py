@@ -1,0 +1,23 @@
+"""
+@author: supermantx
+@time: 2022/1/23 9:54
+"""
+import requests
+import os
+
+url = "http://xg.sylu.edu.cn/SPCP/Web/Report/GetLoginVCode?dt=1643176568367"
+uuid = url.split('=')[-1]
+path="./"+"123.png"
+try:
+    with open("123.jpeg", 'wb') as img:
+        headers = {"User-Agent": "User-Agent Mozilla/5.0 (Windows NT 6.1; WOW64) App"
+                                 "leWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.8 Safari/537.36",
+                   "Host": "xg.sylu.edu.cn",
+                   "Upgrade-Insecure-Requests": "1",
+                   "Cookie":"SECKEY_ABVK=q7fSgFBD+8CPLh8vEnYaPcDaAmqsaRPh0Vo/HNXtnqg=; BMAP_SECKEY=jaR_kvzGrCjNiM2s8TbEPmfMuMuxHkWT5aPPyg3dNrQyRkhpGM0Y5qKjAHBlzrQYQGbbmaRMGLf6g_uy6hce7M5fvxHMkr5oA0ZZaG4Lv5wzeqYutka7svTbsXo44fShIzW4kZFweGIKdTyCTAtmaSO_x4mHMoYYm4JaAW8RV8vCWOXzXzfPcZQdr1a-vgTX; ASP.NET_SessionId=dtag51oupcncbu4i044cknr5; CenterSoftWeb=2557BBA40F4DC445A4C65CF022EF1B00593BAB245B95D108567A5306760CF0836B8ABE46611E08EC9BAEA136A4E2B0E631E4B067BAF761891E2E5C8CBCCA9BFFA56192094DD00DAA59261C1DA3B0B894B4FCF4FB2B4749E4F9422DD751490419B9D9876EDC0E48DA36BFE550C7FEEC664E8D28B3E83F2495B75503684B8C0225C24CF8961D3A6FC6CFDD03021B57D15A556334B7E34BB97E428875B3C7EF5A7AB937CD1FAFAF89D18F5557100139A18548E6645ECE87EFCBB10D2CB9D25D053277B7FAFA0BBAE7B5C489A42FCE95688C73611665E7262FD9159E78A0B9E629A00AE064E0AA76332C5B233ED40E30D70D6DB32EF2DAE565AFB3F20A920732BC493E5D91638704C9C4B6664ED392B84279BFBCD74BB139C435BC5D61D088DA40E8"}
+        get = requests.get(url, headers=headers)
+        print(get.request.headers)
+        img.write(get.content)
+        print(get.text)
+except Exception as e:
+    e.with_traceback()
